@@ -20,13 +20,109 @@
           <option value="Green">Green</option>
         </select>
 
-        <label for="desiredProperties">Desired Properties:</label>
-        <textarea id="desiredProperties" rows="3">
-Forceful,Bitter,Furious,Titanic,Sneaking,Sneaking,Sneaking,Sneaking</textarea
-        >
+        <label for="desiredProperties">Desired Purple Crystals:</label>
+        <div class="desired-properties">
+          <div class="weapon-properties">
+            <p>Weapon:</p>
+            <select name="weapon1">
+              <option value="none">none</option>
+              <option value="Bitter">Bitter</option>
+              <option value="Swift">Swift</option>
+              <option value="Titanic">Titanic</option>
+              <option value="Forceful" selected>Forceful</option>
+              <option value="Carving">Carving</option>
+              <option value="Infused">Infused</option>
+              <option value="Relentless">Relentless</option>
+              <option value="Cunning">Cunning</option>
+              <option value="Salivating">Salivating</option>
+              <option value="Pounding">Pounding</option>
+              <option value="Wrathful">Wrathful</option>
+              <option value="Furious">Furious</option>
+            </select>
 
-        <label for="numberIteration">Number of Iterations:</label>
-        <input type="number" id="numberIteration" value="100" />
+            <select name="weapon2">
+              <option value="none">none</option>
+              <option value="Bitter" selected>Bitter</option>
+              <option value="Swift">Swift</option>
+              <option value="Titanic">Titanic</option>
+              <option value="Forceful">Forceful</option>
+              <option value="Carving">Carving</option>
+              <option value="Infused">Infused</option>
+              <option value="Relentless">Relentless</option>
+              <option value="Cunning">Cunning</option>
+              <option value="Salivating">Salivating</option>
+              <option value="Pounding">Pounding</option>
+              <option value="Wrathful">Wrathful</option>
+              <option value="Furious">Furious</option>
+            </select>
+
+            <select name="weapon3">
+              <option value="none">none</option>
+              <option value="Bitter">Bitter</option>
+              <option value="Swift">Swift</option>
+              <option value="Titanic">Titanic</option>
+              <option value="Forceful">Forceful</option>
+              <option value="Carving">Carving</option>
+              <option value="Infused">Infused</option>
+              <option value="Relentless">Relentless</option>
+              <option value="Cunning">Cunning</option>
+              <option value="Salivating">Salivating</option>
+              <option value="Pounding">Pounding</option>
+              <option value="Wrathful">Wrathful</option>
+              <option value="Furious" selected>Furious</option>
+            </select>
+
+            <select name="weapon4">
+              <option value="none">none</option>
+              <option value="Bitter">Bitter</option>
+              <option value="Swift">Swift</option>
+              <option value="Titanic" selected>Titanic</option>
+              <option value="Forceful">Forceful</option>
+              <option value="Carving">Carving</option>
+              <option value="Infused">Infused</option>
+              <option value="Relentless">Relentless</option>
+              <option value="Cunning">Cunning</option>
+              <option value="Salivating">Salivating</option>
+              <option value="Pounding">Pounding</option>
+              <option value="Wrathful">Wrathful</option>
+              <option value="Furious">Furious</option>
+            </select>
+          </div>
+
+          <div class="armor-properties">
+            <p>Armor:</p>
+            <select name="armor1">
+              <option value="none">none</option>
+              <option value="Shielding">Shielding</option>
+              <option value="Sneaking" selected>Sneaking</option>
+              <option value="Confronting">Confronting</option>
+            </select>
+
+            <select name="armor2">
+              <option value="none">none</option>
+              <option value="Shielding">Shielding</option>
+              <option value="Sneaking" selected>Sneaking</option>
+              <option value="Confronting">Confronting</option>
+            </select>
+
+            <select name="armor3">
+              <option value="none">none</option>
+              <option value="Shielding">Shielding</option>
+              <option value="Sneaking" selected>Sneaking</option>
+              <option value="Confronting">Confronting</option>
+            </select>
+
+            <select name="armor4">
+              <option value="none">none</option>
+              <option value="Shielding">Shielding</option>
+              <option value="Sneaking" selected>Sneaking</option>
+              <option value="Confronting">Confronting</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="numberIteration">Number of simulation:</label>
+        <input type="number" id="numberIteration" value="10" />
         <p class="description">
           This number represents the total number of times the simulation will
           be run. The higher the number of iterations, the more accurate the
