@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crystal Box Simulator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Crystal Box Simulator</h1>
+      <form id="simulationForm">
+        <label for="whiteBoxChance">White Box Chance (1 in x):</label>
+        <input type="number" id="whiteBoxChance" value="600" />
+
+        <label for="greenBoxChance">Green Box Chance (1 in x):</label>
+        <input type="number" id="greenBoxChance" value="200" />
+
+        <label for="rarityBox">Rarity of the Box (White or Green):</label>
+        <select id="rarityBox">
+          <option value="White">White</option>
+          <option value="Green">Green</option>
+        </select>
+
+        <label for="desiredProperties">Desired Properties:</label>
+        <textarea id="desiredProperties" rows="3">
+Forceful,Bitter,Furious,Titanic,Sneaking,Sneaking,Sneaking,Sneaking</textarea
+        >
+
+        <label for="numberIteration">Number of Iterations:</label>
+        <input type="number" id="numberIteration" value="100" />
+        <p class="description">
+          This number represents the total number of times the simulation will
+          be run. The higher the number of iterations, the more accurate the
+          average number of opened boxes will be, but it will also make the
+          simulation longer.
+        </p>
+
+        <button type="button" onclick="runSimulation()">Run Simulation</button>
+      </form>
+
+      <div id="result">
+        <h2>Results:</h2>
+        <p id="averageBoxOpen">Average number of box open:</p>
+        <p id="averagePurpleToken">Average number of purple tokens:</p>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
