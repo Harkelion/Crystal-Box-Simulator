@@ -9,10 +9,24 @@ function runSimulation() {
   const numberIteration = parseInt(
     document.getElementById("numberIteration").value
   );
-  const desiredProperties = document
-    .getElementById("desiredProperties")
-    .value.split(",")
-    .map((prop) => prop.trim());
+  function createDesiredPropertiesArray() {
+    const weaponOptions = document.querySelectorAll(
+      ".weapon-properties select"
+    );
+    const armorOptions = document.querySelectorAll(".armor-properties select");
+
+    const selectedWeaponOptions = Array.from(weaponOptions)
+      .map((select) => select.value)
+      .filter((value) => value !== "none");
+
+    const selectedArmorOptions = Array.from(armorOptions)
+      .map((select) => select.value)
+      .filter((value) => value !== "none");
+
+    return [...selectedWeaponOptions, ...selectedArmorOptions];
+  }
+
+  const desiredProperties = createDesiredPropertiesArray();
 
   // Function to generate a random number between min (inclusive) and max (exclusive)
   function getRandomInt(min, max) {
@@ -39,7 +53,7 @@ function runSimulation() {
     "Salivating",
     "Pounding",
     "Wrathful",
-    "Furious",
+    "Furious"
   ];
 
   // Properties of crystals of type Armor
@@ -284,13 +298,13 @@ function runSimulation() {
   }
 
   // console.log(inventory);
-  console.log(
-    "Average number of box Open : " + Math.floor(totalBox / numberIteration)
-  );
-  console.log(
-    "Average number of purple token : " +
-      Math.floor(totalToken / numberIteration)
-  );
+  // console.log(
+  //   "Average number of box Open : " + Math.floor(totalBox / numberIteration)
+  // );
+  // console.log(
+  //   "Average number of purple token : " +
+  //     Math.floor(totalToken / numberIteration)
+  // );
 
   const averageBoxOpen = Math.floor(totalBox / numberIteration);
   const averagePurpleToken = Math.floor(totalToken / numberIteration);
@@ -300,3 +314,6 @@ function runSimulation() {
   document.getElementById("averagePurpleToken").textContent =
     "Average number of purple tokens: " + averagePurpleToken;
 }
+
+const button = document.querySelector("button[onclick='runSimulation()']");
+button.onclick = runSimulation;
