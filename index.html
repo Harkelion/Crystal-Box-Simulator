@@ -1,145 +1,108 @@
 <!DOCTYPE html>
+<meta charset="utf-8" />
 <html>
   <head>
-    <title>Crystal Box Simulator</title>
-    <link rel="stylesheet" type="text/css" href="./src/styles.css" />
+    <title>Exemple d'appel API</title>
   </head>
   <body>
-    <div class="container">
-      <h1>Crystal Box Simulator</h1>
-      <form id="simulationForm">
-        <label for="whiteBoxChance">White Box Chance (1 in x):</label>
-        <input type="number" id="whiteBoxChance" value="600" />
+    <button onclick="fetchData()">Obtenir les résultats</button>
+    <div id="results"></div>
 
-        <label for="greenBoxChance">Green Box Chance (1 in x):</label>
-        <input type="number" id="greenBoxChance" value="200" />
+    <script>
+      async function fetchApiData(
+        region,
+        zone,
+        boss,
+        ver,
+        server,
+        playerClass,
+        role,
+        ttank,
+        theal
+      ) {
+        const apiUrl =
+          `https://moongourd.com/api/mg/ranking_class?region=${region}&zone=${zone}&boss=${boss}&ver=${ver}&role=${role}&server=${encodeURIComponent(
+            server
+          )}&class=${encodeURIComponent(playerClass)}` +
+          (ttank != 0 ? `&ttank=${ttank}` : "") +
+          (theal != 0 ? `&theal=${theal}` : "");
 
-        <label for="rarityBox">Rarity of the Box (White or Green):</label>
-        <select id="rarityBox">
-          <option value="White">White</option>
-          <option value="Green">Green</option>
-        </select>
+        try {
+          const response = await fetch(apiUrl);
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          return null;
+        }
+      }
 
-        <label for="desiredProperties">Desired Purple Crystals:</label>
-        <div class="desired-properties">
-          <div class="weapon-properties">
-            <p>Weapon:</p>
-            <select name="weapon1">
-              <option value="none">none</option>
-              <option value="Bitter">Bitter</option>
-              <option value="Swift">Swift</option>
-              <option value="Titanic">Titanic</option>
-              <option value="Forceful" selected>Forceful</option>
-              <option value="Carving">Carving</option>
-              <option value="Infused">Infused</option>
-              <option value="Relentless">Relentless</option>
-              <option value="Cunning">Cunning</option>
-              <option value="Salivating">Salivating</option>
-              <option value="Pounding">Pounding</option>
-              <option value="Wrathful">Wrathful</option>
-              <option value="Furious">Furious</option>
-            </select>
+      const region = "mn";
+      const zone = 756;
+      const boss = 1002;
+      const ver = 1;
+      const server = "Menma's TERA";
+      const role = 1; // Dps
+      const ttank = 1;
+      const theal = 2;
+      const tankRole = {
+        0: "AnyTank",
+        1: "Lancer",
+        2: "Brawler",
+        3: "",
+        4: "Warrior"
+      };
+      const HealerRole = {
+        0: "AnyHealer",
+        1: "Mystic",
+        2: "Priest"
+      };
+      const playerBaseMin = 3;
 
-            <select name="weapon2">
-              <option value="none">none</option>
-              <option value="Bitter" selected>Bitter</option>
-              <option value="Swift">Swift</option>
-              <option value="Titanic">Titanic</option>
-              <option value="Forceful">Forceful</option>
-              <option value="Carving">Carving</option>
-              <option value="Infused">Infused</option>
-              <option value="Relentless">Relentless</option>
-              <option value="Cunning">Cunning</option>
-              <option value="Salivating">Salivating</option>
-              <option value="Pounding">Pounding</option>
-              <option value="Wrathful">Wrathful</option>
-              <option value="Furious">Furious</option>
-            </select>
+      const classArray = [
+        "Archer",
+        "Berserker",
+        "Brawler",
+        "Gunner",
+        "Ninja",
+        "Reaper",
+        "Slayer",
+        "Sorcerer",
+        "Valkyrie",
+        "Warrior"
+      ];
 
-            <select name="weapon3">
-              <option value="none">none</option>
-              <option value="Bitter">Bitter</option>
-              <option value="Swift">Swift</option>
-              <option value="Titanic">Titanic</option>
-              <option value="Forceful">Forceful</option>
-              <option value="Carving">Carving</option>
-              <option value="Infused">Infused</option>
-              <option value="Relentless">Relentless</option>
-              <option value="Cunning">Cunning</option>
-              <option value="Salivating">Salivating</option>
-              <option value="Pounding">Pounding</option>
-              <option value="Wrathful">Wrathful</option>
-              <option value="Furious" selected>Furious</option>
-            </select>
+      async function fetchData() {
+        const resultsDiv = document.getElementById("results");
+        resultsDiv.innerHTML = "";
 
-            <select name="weapon4">
-              <option value="none">none</option>
-              <option value="Bitter">Bitter</option>
-              <option value="Swift">Swift</option>
-              <option value="Titanic" selected>Titanic</option>
-              <option value="Forceful">Forceful</option>
-              <option value="Carving">Carving</option>
-              <option value="Infused">Infused</option>
-              <option value="Relentless">Relentless</option>
-              <option value="Cunning">Cunning</option>
-              <option value="Salivating">Salivating</option>
-              <option value="Pounding">Pounding</option>
-              <option value="Wrathful">Wrathful</option>
-              <option value="Furious">Furious</option>
-            </select>
-          </div>
-
-          <div class="armor-properties">
-            <p>Armor:</p>
-            <select name="armor1">
-              <option value="none">none</option>
-              <option value="Shielding">Shielding</option>
-              <option value="Sneaking" selected>Sneaking</option>
-              <option value="Confronting">Confronting</option>
-            </select>
-
-            <select name="armor2">
-              <option value="none">none</option>
-              <option value="Shielding">Shielding</option>
-              <option value="Sneaking" selected>Sneaking</option>
-              <option value="Confronting">Confronting</option>
-            </select>
-
-            <select name="armor3">
-              <option value="none">none</option>
-              <option value="Shielding">Shielding</option>
-              <option value="Sneaking" selected>Sneaking</option>
-              <option value="Confronting">Confronting</option>
-            </select>
-
-            <select name="armor4">
-              <option value="none">none</option>
-              <option value="Shielding">Shielding</option>
-              <option value="Sneaking" selected>Sneaking</option>
-              <option value="Confronting">Confronting</option>
-            </select>
-          </div>
-        </div>
-
-        <label for="numberIteration">Number of simulation:</label>
-        <input type="number" id="numberIteration" value="10" />
-        <p class="description">
-          This number represents the total number of times the simulation will
-          be run. The higher the number of iterations, the more accurate the
-          average number of opened boxes will be, but it will also make the
-          simulation longer.
-        </p>
-
-        <button type="button" onclick="runSimulation()">Run Simulation</button>
-      </form>
-
-      <div id="result">
-        <h2>Results:</h2>
-        <p id="averageBoxOpen">Average number of box open:</p>
-        <p id="averagePurpleToken">Average number of purple tokens:</p>
-      </div>
-    </div>
-
-    <script src="./src/script.js"></script>
+        for (const playerClass of classArray) {
+          try {
+            const data = await fetchApiData(
+              region,
+              zone,
+              boss,
+              ver,
+              server,
+              playerClass,
+              role,
+              ttank,
+              theal
+            );
+            console.log(data);
+            // Afficher les données dans la zone de résultats
+            const resultDisplay = document.createElement("p");
+            resultDisplay.textContent = `${playerClass}: ${JSON.stringify(
+              data
+            )}`;
+            resultsDiv.appendChild(resultDisplay);
+          } catch (error) {
+            console.error("Error fetching data for class:", playerClass, error);
+          }
+        }
+      }
+    </script>
   </body>
 </html>
